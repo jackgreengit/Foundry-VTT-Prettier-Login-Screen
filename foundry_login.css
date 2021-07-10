@@ -18,7 +18,7 @@ based on code by u/bass-blowfish
 
 /* Logo as world title */
 #join-game #world-title {
-  background: url("https://imgur.com/PTjslZo");
+  background: url("https://i.imgur.com/PTjslZo.png");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -31,7 +31,7 @@ based on code by u/bass-blowfish
 body.vtt.players .watermark:before {
   display: block;
   content: " ";
-  background: url("https://imgur.com/I4huWbE");
+  background: url("https://i.imgur.com/I4huWbE.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

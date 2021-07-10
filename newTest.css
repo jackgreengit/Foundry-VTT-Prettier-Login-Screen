@@ -21,7 +21,6 @@ Also converting to flexbox to dynamically vertically center the  section#setup c
 body.vtt.players {
     display: flex;
     align-items: center;
-    overflow-y: visible;
     height: 100%;
     min-height: 100vh;
     background-size: cover;

@@ -1,0 +1,292 @@
+/* ----------------------------------------- */
+/* ----------------------------------------- */
+/* bass-blowfish Login Screen UI Customizations V2
+/* ----------------------------------------- */
+/* ----------------------------------------- */
+
+/* ----------------------------------------- */
+/* Panels: Hiding and resizing panels our group doesn't use and focusing on the panel we do use.
+/* ----------------------------------------- */
+
+/* Foundry Logo Background: Hide */
+.vtt.players #setup {
+    background: none;
+}
+
+/* Panel Labels and World Title: Hide - I'm replacing the header with an image and the Panel titles aren't necessary when there is only one panel.  */
+.vtt.players #setup.join .app h1 {
+    display: none;
+}
+/* Foundry Watermark/emblem: Hide - Re-applying Foundry attribution in the image logo*/
+.vtt.players .watermark {
+    display: none;
+}
+
+/* World Description Panel: Hide  */
+.vtt.players #setup.join .right {
+    margin-left: 8px;
+    display: none;
+}
+
+/* Session Schedule Panel: Hide */
+.vtt.players #setup form#session-schedule {
+    display: none;
+}
+
+/* Panels and Heading Container: Reduces container width. If you want to show the world description you'll need to increase this width. */
+.vtt.players #setup.join {
+    width: 400px;
+    top: initial;
+}
+
+
+
+/* ----------------------------------------- */
+/* New Styles and effects
+/* ----------------------------------------- */
+
+/* Body: Applying blurFade effect to background, having it cover the screen and centering it.
+Also converting to flexbox to dynamically vertically center the  section#setup container.There were some calculations being made to vertically center that weren't dynamic enough to suit this setup (i.e. top: calc(50% - 300px).  Perhaps in the future there could be a parent container to section#setup so we wouldn't have to change the <body> to be a flexbox.*/
+body.vtt.players {
+    display: flex;
+    align-items: center;
+    overflow-y: visible;
+    height: 100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: blurFade 3s ease-out 1;
+}
+
+/* Panels Body Container: Adds zoomOut Animation */
+.vtt.players #setup .join-body {
+    animation: zoomOut 1s .5s cubic-bezier(0.3, 0.05, 0.24, 1) both;
+}
+
+
+/* World Title: Removes all box styles for world title, adds SVG image instead, and animates it. Added "dnd-logo.svg" file to foundryvtt/resources/app/public/ui  */
+ .vtt.players #setup.join #world-title {
+    background: url(https://i.imgur.com/PTjslZo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 230px;
+    max-height: 35vh;
+    max-width: 100%;
+    border: none;
+    box-shadow: none;
+    margin-top: 50px;
+    animation: zoomOut 1s 0s cubic-bezier(0.3, 0.05, 0.24, 1) both;
+}
+
+
+
+/* Animations */
+@keyframes zoomOut {
+  0% {
+    transform: scale(1.4);
+    opacity: 0;
+}
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+
+@keyframes blurFade {
+  0% {
+    backdrop-filter: brightness(0) blur(15px);
+}
+  100% {
+      backdrop-filter: brightness(1) blur(0px);
+  }
+}
+
+
+/* ----------------------------------------- */
+/* Inputs and Buttons
+Making them more usable on both desktop and touch devices by increasing font and input sizes, hit areas, adding visual affordance with shading, and improving visual grouping.
+/* ----------------------------------------- */
+
+/* All Inputs and Buttons: Increase Size and Font Size */
+.vtt.players #setup #join-form input, .vtt.players #setup #join-form select, .vtt.players #setup #join-form button,
+.vtt.players #setup #shutdown input, .vtt.players #setup #shutdown select, .vtt.players #setup #shutdown button {
+    min-height: 50px;
+    padding: 10px !important;
+    border: none !important;
+    font-size: 18px;
+    width: 100%;
+}
+
+/* Select Input: Add slight outset shading and re-applying default focus effects that would be overriden by this */
+.vtt.players #setup #join-form select, .vtt.players #setup #shutdown select {
+    box-shadow: inset 0px 1px 0px #ffffff4f, inset 0px -1px 9px #00000059;
+}
+
+.vtt.players #setup #join-form select:focus, .vtt.players #setup #shutdown select:focus {
+    box-shadow: 0 0 5px red, inset 0px 1px 0px #ffffff4f, inset 0px -1px 9px #00000059;
+}
+
+/* Text Input: Add slight inset shadingand re-applying default focus effects that would be overriden by this */
+.vtt.players #setup #join-form input, .vtt.players #setup #shutdown input {
+    box-shadow: inset 0px -1px 0px #ffffff4f, inset 0px 3px 9px #00000059;
+}
+
+.vtt.players #setup #join-form input:focus, .vtt.players #setup #shutdown input:focus {
+    box-shadow: 0 0 5px red, inset 0px -1px 0px #ffffff4f, inset 0px 3px 9px #00000059;
+}
+
+/* Button: Visually differentiating the function of this from the inputs */
+.vtt.players #setup.dark #join-form button, .vtt.players #setup.dark #shutdown button {
+    background: rgb(120 45 34);
+    border: none;
+    color: #fff;
+    margin-bottom: 0px !important;
+    font-size: 18px;
+}
+
+/* Form Labels: Top aligning form labels for easier input of familiar data. Reference Page 27: https://static.lukew.com/webforms_lukew.pdf */
+.vtt.players #setup #join-form .form-group, .vtt.players #setup #join-form .form-group-stacked,
+.vtt.players #setup #shutdown .form-group, .vtt.players #setup #shutdown .form-group-stacked {
+    clear: both;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: 0;
+    overflow: hidden;
+}
+
+.vtt.players #setup #join-form .form-group label,
+.vtt.players #setup #shutdown .form-group label{
+    line-height: 31px;
+    width: 100%;
+}
+
+/* Select Input Arrow: Needed to replace the arrow because after I adjusted the spacing I couldn't figure out how to adjust the original arrow */
+.vtt.players #setup.join #join-form select,
+.vtt.players #setup.join #shutdown select {
+    appearance: none;
+}
+
+.vtt.players #setup #join-form .form-group:nth-child(2):after {
+    content: '\25BC';
+    position: absolute;
+    right: 14px;
+    color: #000;
+    font-size: 15px;
+    bottom: 16px;
+}
+
+/* Input Labels: Applying more high-contrast label color for readability */
+.vtt.players #setup .app {
+    color: #fff6db !important;
+}
+
+
+/* Password Input: Hiding placeholder text because it just repeats the label */
+.vtt.players #setup #join-form input[type="password"]::placeholder,
+.vtt.players #setup #shutdown input[type="password"]::placeholder {
+    color: transparent;
+}
+
+/* Creating new labels and hiding old ones to be more in line with form conventions. There is no need to say things like "select", people have seen forms, if it looks like a form they understand. Also changing "Access Key" to a more common vernacular "Password" that is functionally the same from the player's perspective. */
+.vtt.players #setup #join-form .form-group label > i:after,
+.vtt.players #setup #shutdown .form-group label > i:after {
+    content: 'Player';
+    font-family: 'Signika';
+    padding-left: 4px;
+}
+
+.vtt.players #setup #join-form .form-group:nth-child(3) label > i:after {
+    content: 'Password';
+}
+
+.vtt.players #setup #join-form label > i,
+.vtt.players #setup #shutdown label > i {
+    margin-right: -1000px;
+}
+/* Left Column: Hides overflow so labels I'm moving out of the way since they're being replaced aren't displayed */
+
+.vtt.players #setup #join-form {
+    padding: 30px;
+}
+
+/* Button: Changing check mark icon to arrow and moving it to the right because it helps indicate they're logging in and will be taken somewhere. */
+.vtt.players #setup #join-form i.fas.fa-check {
+    display: none;
+}
+
+.vtt.players #setup #join-form button:after {
+    content: '\2192';
+}
+
+/* Button: Adding more clear hover effect to users know this is a button */
+.vtt.players #setup.join #join-form button:hover,
+.vtt.players #setup.join #shutdown button:hover {
+    background: rgb(142 47 34);
+    box-shadow: none;
+}
+
+
+
+
+
+/* Return To Setup / Shutdown Panel: Adding Expand/Collapse functionality  */
+
+.vtt.players #setup #shutdown input {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: block;
+}
+.vtt.players #setup #shutdown:focus-within .form-group {
+  height: inherit;
+  width: inherit;
+}
+.vtt.players #setup #shutdown:focus-within input {
+  position: inherit;
+  display: inherit;
+}
+.vtt.players #setup #shutdown:focus-within {
+  padding: 30px;
+}
+.vtt.players #setup #shutdown {
+    padding: 0;
+}
+.vtt.players #setup #shutdown:focus-within {
+    padding: 30px;
+}
+.vtt.players #setup #shutdown .form-group label {
+    padding: 15px 0 0 30px;
+}
+
+.vtt.players #setup #shutdown:focus-within .form-group label {
+    padding:inherit;
+}
+
+.vtt.players #setup #shutdown button[data-action="shutdown"] {
+    display: none;
+}
+.vtt.players #setup #shutdown:focus-within button[data-action="shutdown"] {
+    display: inherit;
+}
+
+.vtt.players #setup #shutdown input[name="adminKey"] {
+    opacity: 0;
+}
+.vtt.players #setup #shutdown:focus-within input[name="adminKey"] {
+    opacity: 1;
+}
+.vtt.players #setup #shutdown .form-group label .fa-key:before {
+    content: "";
+}
+.vtt.players #setup #shutdown:focus-within .form-group label .fa-key:before {
+    content: "\f084";
+}
+.vtt.players #setup #shutdown .form-group label > i:after {
+    content: 'Admin Setup Access';
+}
+.vtt.players #setup #shutdown:focus-within .form-group label > i:after {
+    content: 'Admin Password';
+}
